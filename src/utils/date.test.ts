@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { addMonths, getMonthMatrix, isSameMonth, parseISODate, toISODate } from '../utils/date'
+import { addMonths, getMonthMatrix, isSameMonth, parseISODate, toISODate } from './date'
 
 describe('toISODate / parseISODate', () => {
   it('round-trips a date', () => {

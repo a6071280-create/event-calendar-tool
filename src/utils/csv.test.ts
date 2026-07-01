@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { toCSV } from '../utils/csv'
+import { toCSV } from './csv'
 
 describe('toCSV', () => {
   it('joins headers and rows with CRLF', () => {
