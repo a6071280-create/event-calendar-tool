@@ -48,4 +48,20 @@ export interface OwnPromotionDay {
 
 export type AreaFilterMode = 'nagano' | 'all'
 
-export type ViewTab = 'calendar' | 'list' | 'summary'
+export type ViewTab = 'calendar' | 'list' | 'summary' | 'forecast'
+
+/** 日別の実績（来店客数など任意の指標） */
+export interface ActualResult {
+  date: string // YYYY-MM-DD
+  visitors: number
+}
+
+/** 稼働予測のカレンダー軸設定 */
+export interface ForecastSettings {
+  /** 給料日とみなす日（例: [25]） */
+  paydayDays: number[]
+  /** 年金支給日とみなす日（例: [15]） */
+  pensionDays: number[]
+  /** 年金支給がある月（例: 偶数月） */
+  pensionMonths: number[]
+}

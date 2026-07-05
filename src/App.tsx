@@ -3,6 +3,7 @@ import { AreaFilterBar } from './components/AreaFilterBar'
 import { CalendarView } from './components/CalendarView/CalendarView'
 import { EventModal } from './components/EventModal'
 import type { EventInput } from './components/EventModal'
+import { ForecastView } from './components/ForecastView'
 import { ListView } from './components/ListView'
 import { OwnPromotionModal } from './components/OwnPromotionModal'
 import type { OwnPromotionInput } from './components/OwnPromotionModal'
@@ -27,6 +28,7 @@ const TABS: { key: ViewTab; label: string }[] = [
   { key: 'calendar', label: 'カレンダー' },
   { key: 'list', label: 'リスト' },
   { key: 'summary', label: '集計' },
+  { key: 'forecast', label: '稼働予測' },
 ]
 
 function App() {
@@ -122,6 +124,7 @@ function App() {
           />
         )}
         {activeTab === 'summary' && <SummaryView events={visibleEvents} currentMonth={currentMonth} />}
+        {activeTab === 'forecast' && <ForecastView events={events} ownPromotions={ownPromotions} />}
       </main>
 
       {eventModal && (
