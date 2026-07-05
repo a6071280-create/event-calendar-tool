@@ -370,8 +370,139 @@ button {
 .summary-view__ranking-count { text-align: right; color: var(--text-muted); }
 .summary-view__empty { color: var(--text-muted); font-size: 12px; }
 
+/* ── 稼働予測 ─────────────────────────────────────────────────── */
+.forecast-view h2 { font-size: 15px; margin-bottom: 6px; }
+.forecast-view__description {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.forecast-view__panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.forecast-view__panel {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 16px;
+}
+.forecast-view__panel h3 { font-size: 13px; margin-bottom: 10px; }
+.forecast-view__panel--wide { margin-bottom: 16px; }
+.forecast-view__input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.forecast-view__input-row input {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 6px 8px;
+  font-size: 13px;
+  font-family: inherit;
+}
+.forecast-view__input-row input[type='number'] { width: 90px; }
+.forecast-view__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.forecast-view__table th, .forecast-view__table td {
+  text-align: left;
+  padding: 6px 8px;
+  font-size: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.forecast-view__table th { background: var(--surface-2); color: var(--text-muted); font-weight: 700; }
+.forecast-view__delete {
+  background: transparent;
+  border: none;
+  color: var(--danger);
+  font-size: 14px;
+  padding: 0 4px;
+}
+.forecast-view__import { margin-top: 12px; font-size: 12px; }
+.forecast-view__import summary { cursor: pointer; color: var(--primary-light); font-weight: 600; }
+.forecast-view__import textarea {
+  width: 100%;
+  margin-top: 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 6px 8px;
+  font-size: 12px;
+  font-family: inherit;
+}
+.forecast-view__import-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+.forecast-view__import-message { color: var(--text-muted); font-size: 12px; }
+.forecast-view__settings {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.forecast-view__settings label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.forecast-view__settings input {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 6px 8px;
+  font-size: 13px;
+  width: 140px;
+  font-family: inherit;
+}
+.forecast-view__settings-note { font-size: 11px; color: var(--text-muted); }
+.forecast-view__empty { color: var(--text-muted); font-size: 12px; }
+.forecast-view__model-stats { font-size: 12px; margin-bottom: 10px; }
+.forecast-view__pos { color: var(--success); font-weight: 600; }
+.forecast-view__neg { color: var(--danger); font-weight: 600; }
+.forecast-view__sat { color: var(--primary-light); font-weight: 600; }
+.forecast-view__predicted { font-weight: 700; }
+.forecast-view__reasons { color: var(--text-muted); }
+.forecast-view__forecast-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.forecast-view__forecast-toolbar h3 { margin-bottom: 0; }
+.forecast-view__horizon {
+  display: flex;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-left: auto;
+}
+.forecast-view__horizon button {
+  background: var(--surface);
+  border: none;
+  padding: 5px 12px;
+  font-size: 12px;
+  border-right: 1px solid var(--border-strong);
+}
+.forecast-view__horizon button:last-child { border-right: none; }
+.forecast-view__horizon button.active {
+  background: var(--primary-light);
+  color: #fff;
+  font-weight: 700;
+}
+.forecast-view__note { margin-top: 10px; font-size: 11px; color: var(--text-muted); }
+
 @media (max-width: 720px) {
   .summary-view__panels { grid-template-columns: 1fr; }
+  .forecast-view__panels { grid-template-columns: 1fr; }
   .calendar-grid { gap: 3px; }
   .day-cell { min-height: 80px; padding: 4px; }
 }
