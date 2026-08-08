@@ -74,4 +74,16 @@ describe('extractEventObservations', () => {
     const obs = extractEventObservations(post('8/18・8/28「特日取材」'), 's', 'X')
     expect(obs.map((o) => o.date)).toEqual(['2026-08-18', '2026-08-28'])
   })
+
+  it('掲載日(年付き)とイベント日(M/D)が混在する場合はイベント日だけを使う', () => {
+    const obs = extractEventObservations(post('2026/07/18 ★7/24新台入替★'), 's', 'X')
+    expect(obs).toHaveLength(1)
+    expect(obs[0].date).toBe('2026-07-24')
+  })
+
+  it('年付き日付しかない場合はそのまま使う', () => {
+    const obs = extractEventObservations(post('2026年8月14日 新台入替'), 's', 'X')
+    expect(obs).toHaveLength(1)
+    expect(obs[0].date).toBe('2026-08-14')
+  })
 })
