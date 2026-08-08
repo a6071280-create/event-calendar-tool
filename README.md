@@ -19,6 +19,7 @@
 - 収集パイプライン（`collector/`）が `data/db/` のイベントDB（JSON）を更新し、`public/data/dataset.json` を生成します。GitHub Actions（`.github/workflows/collect.yml`）が1日3回（JST 6/12/18時）自動実行します。
 - **P-WORLD・DMMぱちタウンは利用規約により自動取得禁止のため、スクレイピングしません**（詳細: docs/research.md）。目視確認した情報は画面の「＋イベントを手動登録」から数タップで登録でき、「手動登録をエクスポート」で出力した JSON を `data/manual/` にコミットすると正式なDBへ取り込まれます。
 - 許可が確認できた店舗公式サイトは `collector/src/adapters/officialSite.ts` に設定を追加して有効化できます（robots.txt 遵守はフェッチ層が機械的に強制）。
+- **店舗公式Xの自動収集**（`collector/src/adapters/officialX.ts`）は公式 X API 経由で実装済み。X API Basic 以上を契約し、GitHub Secrets に `X_BEARER_TOKEN` を登録 → `data/sources.json` の `official_sns.enabled` を `true` → `data/stores.json` の `urls.sns` に各店舗の X アカウント URL を登録すると、定期ジョブが新規投稿から日付＋イベント種別を機械抽出して取り込みます（投稿へのリンクが情報源URLになります）。
 - 初期状態はサンプルデータ（`data/manual/00-demo-seed.json`、画面にバナー表示）。実運用開始時はこのファイルと `data/db/`・`public/data/dataset.json` を削除して `npm run collect` を実行してください。
 
 ```bash

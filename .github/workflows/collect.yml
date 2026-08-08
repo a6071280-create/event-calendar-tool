@@ -33,6 +33,8 @@ jobs:
 
       - name: Run collector
         run: npm run collect
+        env:
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
 
       - name: Commit updated data
         run: |

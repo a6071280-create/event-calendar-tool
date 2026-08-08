@@ -26,7 +26,7 @@
       "name": "公式SNS",
       "automation": "api_required",
       "enabled": false,
-      "notes": "X は公式 API 契約時のみ。画面スクレイピングは規約違反のため実装しない。"
+      "notes": "公式 X API アダプタ実装済み(collector/src/adapters/officialX.ts)。有効化には X API Basic 以上の契約 + GitHub Secrets への X_BEARER_TOKEN 登録 + このフラグを true + stores.json の urls.sns にアカウントURL登録が必要。画面スクレイピングは規約違反のため実装しない。"
     },
     {
       "id": "manual",
