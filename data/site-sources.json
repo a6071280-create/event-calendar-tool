@@ -22,6 +22,16 @@
       "notes": "ダイナム長野佐久店の公式店舗ページ（お知らせ・新台入替）。ご利用規定(dynam.jp/misc/provisions.html)に自動取得の禁止条項は確認されず。robots.txt はフェッチ時に自動確認"
     },
     {
+      "id": "maruhan-official-saku-news",
+      "mode": "store",
+      "storeId": "maruhan-saku",
+      "sourceId": "official_site",
+      "sourceName": "マルハン公式サイト",
+      "url": "https://www.maruhan.co.jp/hall/647/",
+      "enabled": true,
+      "notes": "マルハン佐久店の最新情報ページ（/hall/0647/ と構成が異なる場合の検証用）"
+    },
+    {
       "id": "1geki-shuzai-list",
       "mode": "media",
       "sourceId": "other_site",
