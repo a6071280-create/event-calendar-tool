@@ -1,0 +1,22 @@
+{
+  "regions": [
+    {
+      "id": "nagano-saku",
+      "prefecture": "長野県",
+      "city": "佐久市",
+      "enabled": true
+    },
+    {
+      "id": "nagano-ueda",
+      "prefecture": "長野県",
+      "city": "上田市",
+      "enabled": false
+    },
+    {
+      "id": "nagano-nagano",
+      "prefecture": "長野県",
+      "city": "長野市",
+      "enabled": false
+    }
+  ]
+}

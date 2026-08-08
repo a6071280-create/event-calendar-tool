@@ -1,0 +1,44 @@
+{
+  "comment": "汎用ページ収集の対象。robots.txt はフェッチ層が毎回確認し、許可されないURLは自動的にスキップされる。enabled を true にする前にサイトの利用規約を確認すること。mode: 'store'=特定店舗のページ / 'media'=複数ホールが載る取材メディア等のページ（店舗名マッチングで自店・競合店の分だけ取り込む）",
+  "sites": [
+    {
+      "id": "maruhan-official-saku",
+      "mode": "store",
+      "storeId": "maruhan-saku",
+      "sourceId": "official_site",
+      "sourceName": "マルハン公式サイト",
+      "url": "https://www.maruhan.co.jp/hall/0647/",
+      "enabled": true,
+      "notes": "マルハン佐久店の公式店舗ページ（最新情報・新台入替）。robots.txt はフェッチ時に自動確認"
+    },
+    {
+      "id": "dynam-official-nagano-saku",
+      "mode": "store",
+      "storeId": "dynam-nagano-saku",
+      "sourceId": "official_site",
+      "sourceName": "ダイナム公式サイト",
+      "url": "https://www.dynam.jp/branch/40-286",
+      "enabled": true,
+      "notes": "ダイナム長野佐久店の公式店舗ページ（お知らせ・新台入替）。ご利用規定(dynam.jp/misc/provisions.html)に自動取得の禁止条項は確認されず。robots.txt はフェッチ時に自動確認"
+    },
+    {
+      "id": "1geki-shuzai-list",
+      "mode": "media",
+      "sourceId": "other_site",
+      "sourceName": "一撃 取材スケジュール",
+      "url": "https://shuzai.1geki.jp/shuzai/",
+      "enabled": true,
+      "notes": "取材メディア「一撃」が自ら公開する取材予定一覧。佐久市の登録店舗名にマッチした分だけ取り込む。robots.txt はフェッチ時に自動確認。プローブで抽出品質を確認すること"
+    },
+    {
+      "id": "slopachi-hall-superarena",
+      "mode": "store",
+      "storeId": "super-arena-sakudaira",
+      "sourceId": "other_site",
+      "sourceName": "スロパチステーション ホールサイト",
+      "url": "https://777.slopachi-station.com/shop_data/5751/",
+      "enabled": false,
+      "notes": "スーパーアリーナ佐久平店のホールサイト。利用規約の確認が済むまで無効"
+    }
+  ]
+}
