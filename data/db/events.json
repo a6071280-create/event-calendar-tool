@@ -1,0 +1,116 @@
+{
+  "events": [
+    {
+      "id": "ev_toxtm0_2026-07-18",
+      "storeId": "dynam-nagano-saku",
+      "date": "2026-07-18",
+      "name": "新台入替",
+      "category": "新台入替",
+      "detail": "2026/07/18 ★7/24新台入替★",
+      "status": "active",
+      "sources": [
+        {
+          "sourceId": "official_site",
+          "sourceName": "ダイナム公式サイト",
+          "url": "https://www.dynam.jp/branch/40-286",
+          "firstSeenAt": "2026-08-08T23:38:19+09:00",
+          "lastSeenAt": "2026-08-08T23:38:19+09:00"
+        }
+      ],
+      "firstSeenAt": "2026-08-08T23:38:19+09:00",
+      "lastSeenAt": "2026-08-08T23:38:19+09:00",
+      "createdAt": "2026-08-08T23:38:19+09:00",
+      "updatedAt": "2026-08-08T23:38:19+09:00",
+      "changes": [
+        {
+          "at": "2026-08-08T23:38:19+09:00",
+          "type": "added"
+        }
+      ]
+    },
+    {
+      "id": "ev_bc80k5_2026-07-24",
+      "storeId": "dynam-nagano-saku",
+      "date": "2026-07-24",
+      "name": "新台入替",
+      "category": "新台入替",
+      "detail": "★7/24新台入替★",
+      "status": "active",
+      "sources": [
+        {
+          "sourceId": "official_site",
+          "sourceName": "ダイナム公式サイト",
+          "url": "https://www.dynam.jp/branch/40-286",
+          "firstSeenAt": "2026-08-08T23:38:19+09:00",
+          "lastSeenAt": "2026-08-08T23:38:19+09:00"
+        }
+      ],
+      "firstSeenAt": "2026-08-08T23:38:19+09:00",
+      "lastSeenAt": "2026-08-08T23:38:19+09:00",
+      "createdAt": "2026-08-08T23:38:19+09:00",
+      "updatedAt": "2026-08-08T23:38:19+09:00",
+      "changes": [
+        {
+          "at": "2026-08-08T23:38:19+09:00",
+          "type": "added"
+        }
+      ]
+    },
+    {
+      "id": "ev_16tblpj_2026-08-01",
+      "storeId": "dynam-nagano-saku",
+      "date": "2026-08-01",
+      "name": "新台入替",
+      "category": "新台入替",
+      "detail": "2026/08/01 ★8/5新台入替★",
+      "status": "active",
+      "sources": [
+        {
+          "sourceId": "official_site",
+          "sourceName": "ダイナム公式サイト",
+          "url": "https://www.dynam.jp/branch/40-286",
+          "firstSeenAt": "2026-08-08T23:38:19+09:00",
+          "lastSeenAt": "2026-08-08T23:38:19+09:00"
+        }
+      ],
+      "firstSeenAt": "2026-08-08T23:38:19+09:00",
+      "lastSeenAt": "2026-08-08T23:38:19+09:00",
+      "createdAt": "2026-08-08T23:38:19+09:00",
+      "updatedAt": "2026-08-08T23:38:19+09:00",
+      "changes": [
+        {
+          "at": "2026-08-08T23:38:19+09:00",
+          "type": "added"
+        }
+      ]
+    },
+    {
+      "id": "ev_6cwakr_2026-08-05",
+      "storeId": "dynam-nagano-saku",
+      "date": "2026-08-05",
+      "name": "新台入替",
+      "category": "新台入替",
+      "detail": "★8/5新台入替★",
+      "status": "active",
+      "sources": [
+        {
+          "sourceId": "official_site",
+          "sourceName": "ダイナム公式サイト",
+          "url": "https://www.dynam.jp/branch/40-286",
+          "firstSeenAt": "2026-08-08T23:38:19+09:00",
+          "lastSeenAt": "2026-08-08T23:38:19+09:00"
+        }
+      ],
+      "firstSeenAt": "2026-08-08T23:38:19+09:00",
+      "lastSeenAt": "2026-08-08T23:38:19+09:00",
+      "createdAt": "2026-08-08T23:38:19+09:00",
+      "updatedAt": "2026-08-08T23:38:19+09:00",
+      "changes": [
+        {
+          "at": "2026-08-08T23:38:19+09:00",
+          "type": "added"
+        }
+      ]
+    }
+  ]
+}
