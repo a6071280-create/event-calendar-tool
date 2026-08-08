@@ -47,7 +47,28 @@ interface ProbeResult {
   storeMatchedBlocks: number
   /** 診断: 抽出に至らなかった惜しいブロックの例 */
   nearMissSamples: string[]
+  /** 診断: 取材/来店/スケジュール関連の内部リンク（深いページの特定用） */
+  relatedLinks: string[]
   note?: string
+}
+
+/** ページ内の取材・来店・スケジュール関連リンクを列挙する（対象URL特定用の診断） */
+const extractRelatedLinks = (html: string, baseUrl: string, max = 15): string[] => {
+  const links = new Map<string, string>()
+  const re = /<a\b[^>]*href="([^"#]+)"[^>]*>([\s\S]*?)<\/a>/gi
+  let m: RegExpExecArray | null
+  while ((m = re.exec(html)) !== null && links.size < max * 3) {
+    const href = m[1]
+    const text = m[2].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 40)
+    if (!/(取材|来店|スケジュール|イベント|shuzai|schedule|event)/i.test(`${href} ${text}`)) continue
+    try {
+      const abs = new URL(href, baseUrl).toString()
+      if (!links.has(abs)) links.set(abs, text)
+    } catch {
+      /* 不正URLは無視 */
+    }
+  }
+  return [...links.entries()].slice(0, max).map(([url, text]) => `${text || '(no text)'} → ${url}`)
 }
 
 const probeSite = async (
@@ -71,6 +92,7 @@ const probeSite = async (
     keywordOnlyBlocks: 0,
     storeMatchedBlocks: 0,
     nearMissSamples: [],
+    relatedLinks: [],
     note: site.notes,
   }
 
@@ -107,7 +129,12 @@ const probeSite = async (
         const hasKeyword = CATEGORY_KEYWORDS.some((k) => k.pattern.test(norm))
         const matched = site.mode === 'media' ? matchStore(block, stores) : null
         if (site.mode === 'media' && matched) result.storeMatchedBlocks++
-        if (hasDate && !hasKeyword) result.dateOnlyBlocks++
+        if (hasDate && !hasKeyword) {
+          result.dateOnlyBlocks++
+          if (result.nearMissSamples.length < 5) {
+            result.nearMissSamples.push(`[キーワードなし] ${block.slice(0, 90)}`)
+          }
+        }
         if (!hasDate && hasKeyword) {
           result.keywordOnlyBlocks++
           if (result.nearMissSamples.length < 5) {
@@ -118,6 +145,7 @@ const probeSite = async (
           result.nearMissSamples.push(`[店舗名不一致] ${block.slice(0, 90)}`)
         }
       }
+      result.relatedLinks = extractRelatedLinks(html, site.url)
       const observations = extractFromPage(html, site, stores, now)
       result.extracted = observations.length
       result.storeCount = new Set(observations.map((o) => o.storeId)).size
@@ -181,6 +209,9 @@ const main = async () => {
           : []),
         ...(r.nearMissSamples.length > 0
           ? ['- 抽出に至らなかった例:', ...r.nearMissSamples.map((s) => `  - ${s}`)]
+          : []),
+        ...(r.relatedLinks.length > 0
+          ? ['- 取材/来店/スケジュール関連リンク:', ...r.relatedLinks.map((s) => `  - ${s}`)]
           : []),
         '',
       )

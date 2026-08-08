@@ -13,7 +13,8 @@ export const CATEGORY_KEYWORDS: { pattern: RegExp; category: EventCategory; labe
   { pattern: /(\d+)周年/, category: '周年', label: '周年' },
   { pattern: /実戦取材|実践取材|実戦来店|実践来店/, category: '実践来店', label: '実戦来店' },
   { pattern: /取材/, category: '取材', label: '取材' },
-  { pattern: /来店/, category: '来店', label: '来店' },
+  // 「ご来店お待ちしております」等の挨拶文を除外するため「ご来店」は対象外
+  { pattern: /(?<!ご)来店/, category: '来店', label: '来店' },
   { pattern: /特定日|特日/, category: '特定日', label: '特定日' },
 ]
 

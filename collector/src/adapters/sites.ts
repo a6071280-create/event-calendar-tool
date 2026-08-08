@@ -10,7 +10,7 @@
 import fs from 'node:fs'
 import type { EventObservation, ObservationBatch, Store } from '../../../src/saku/lib/types'
 import { EMPTY_BATCH } from '../../../src/saku/lib/types'
-import { extractFromText } from '../extractCore'
+import { CATEGORY_KEYWORDS, extractDates, extractFromText } from '../extractCore'
 import { htmlToTextBlocks } from '../htmlText'
 import { SITE_SOURCES_FILE } from '../paths'
 import { politeFetch, PolitenessError } from '../politeFetch'
@@ -51,14 +51,37 @@ export const extractFromPage = (
 ): EventObservation[] => {
   const blocks = htmlToTextBlocks(html)
   const observations: EventObservation[] = []
+  const seen = new Set<string>()
   const source = { sourceId: site.sourceId, sourceName: site.sourceName, url: site.url }
 
-  for (const block of blocks) {
+  // 見出しと日付が別ブロックに分かれるページ（例: 「★新台入替★」の次の行に日付）を
+  // 拾えるよう、store モードに限り「キーワードのみのブロック + 日付を含む次ブロック」を
+  // 結合して追加する。media モードは行ごとに完結する一覧が前提のため結合しない
+  // （結合すると隣り合う別ホールの行が混ざり誤検知になる）。
+  const texts: string[] = blocks.slice()
+  if (site.mode === 'store') {
+    for (let i = 0; i + 1 < blocks.length; i++) {
+      const norm = blocks[i].normalize('NFKC')
+      const hasKeyword = CATEGORY_KEYWORDS.some((k) => k.pattern.test(norm))
+      const hasDate = extractDates(norm, nowIso).length > 0
+      const nextHasDate = extractDates(blocks[i + 1].normalize('NFKC'), nowIso).length > 0
+      if (hasKeyword && !hasDate && nextHasDate) {
+        texts.push(`${blocks[i]} ${blocks[i + 1]}`)
+      }
+    }
+  }
+
+  for (const text of texts) {
     if (observations.length >= MAX_OBSERVATIONS_PER_SITE) break
     const storeId =
-      site.mode === 'store' ? (site.storeId ?? null) : (matchStore(block, stores)?.id ?? null)
+      site.mode === 'store' ? (site.storeId ?? null) : (matchStore(text, stores)?.id ?? null)
     if (!storeId) continue
-    observations.push(...extractFromText(block, nowIso, storeId, source, nowIso))
+    for (const obs of extractFromText(text, nowIso, storeId, source, nowIso)) {
+      const key = `${obs.storeId}|${obs.date}|${normalize(obs.name)}|${obs.category}`
+      if (seen.has(key)) continue
+      seen.add(key)
+      observations.push(obs)
+    }
   }
   return observations.slice(0, MAX_OBSERVATIONS_PER_SITE)
 }
