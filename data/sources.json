@@ -1,0 +1,39 @@
+{
+  "sources": [
+    {
+      "id": "dmm_ptown",
+      "name": "DMMぱちタウン",
+      "automation": "prohibited",
+      "enabled": false,
+      "notes": "利用規約により無許可の自動取得は禁止。店長が目視確認し手動クイック登録で取り込む。データ利用許諾が得られた場合のみアダプタを実装・有効化する。"
+    },
+    {
+      "id": "pworld",
+      "name": "P-WORLD",
+      "automation": "prohibited",
+      "enabled": false,
+      "notes": "総合利用規約が許可のないデータ収集行為を明示的に禁止。手動確認のみ。"
+    },
+    {
+      "id": "official_site",
+      "name": "店舗公式サイト",
+      "automation": "conditional",
+      "enabled": false,
+      "notes": "店舗ごとに robots.txt と利用規約を確認してから collector/src/adapters/officialSite.ts に設定を追加し有効化する。robots.txt チェックは fetch 層で強制される。"
+    },
+    {
+      "id": "official_sns",
+      "name": "公式SNS",
+      "automation": "api_required",
+      "enabled": false,
+      "notes": "X は公式 API 契約時のみ。画面スクレイピングは規約違反のため実装しない。"
+    },
+    {
+      "id": "manual",
+      "name": "手動登録",
+      "automation": "manual",
+      "enabled": true,
+      "notes": "アプリのクイック登録、および data/manual/*.json の取り込み。"
+    }
+  ]
+}

@@ -506,3 +506,282 @@ button {
   .calendar-grid { gap: 3px; }
   .day-cell { min-height: 80px; padding: 4px; }
 }
+
+/* ── 佐久市マトリクスカレンダー ─────────────────────────────────── */
+.saku-view { display: flex; flex-direction: column; gap: 10px; }
+
+.saku-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.saku-toolbar__month { display: flex; align-items: center; gap: 8px; }
+.saku-toolbar__month h2 { font-size: 15px; min-width: 180px; text-align: center; }
+.saku-toolbar__month button,
+.saku-toolbar__jump button {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-size: 12px;
+}
+.saku-toolbar__jump { display: flex; gap: 6px; margin-left: auto; }
+.saku-toolbar__jump button { font-weight: 600; }
+
+.saku-banner {
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+.saku-banner--demo { background: #fff7e6; border-color: #f0d9a8; color: #8a5a00; }
+.saku-banner--error { background: #fdeaea; border-color: #f0b6b6; color: var(--danger); }
+
+.saku-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+}
+.saku-filters__store { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); }
+.saku-filters__store select {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 5px 8px;
+  font-size: 12px;
+  font-family: inherit;
+}
+.saku-filters__chips { display: flex; gap: 4px; flex-wrap: wrap; }
+.saku-chip {
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.saku-chip--on { background: var(--primary-light); border-color: var(--primary-light); color: #fff; font-weight: 600; }
+.saku-chip--diff.saku-chip--on { background: var(--warning); border-color: var(--warning); }
+.saku-filters__manual { display: flex; gap: 6px; margin-left: auto; }
+
+.saku-matrix {
+  overflow-x: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  max-height: 72vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.saku-matrix table { border-collapse: separate; border-spacing: 0; width: 100%; }
+.saku-matrix th, .saku-matrix td { border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); }
+.saku-matrix thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: var(--primary);
+  color: #fff;
+  font-size: 12px;
+  padding: 0;
+  min-width: 108px;
+}
+.saku-matrix thead th.saku-matrix__corner { left: 0; z-index: 4; min-width: 64px; width: 64px; }
+.saku-matrix__store button {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 8px 6px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.saku-matrix__store--own { background: #0f2547; }
+.saku-own-badge {
+  background: var(--own-promo);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  border-radius: 3px;
+  padding: 1px 4px;
+  margin-left: 4px;
+  font-style: normal;
+  vertical-align: middle;
+}
+.saku-matrix tbody th.saku-matrix__date {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: var(--surface-2);
+  padding: 6px 8px;
+  text-align: left;
+  font-size: 12px;
+  white-space: nowrap;
+  width: 64px;
+}
+.saku-matrix__daynum { font-weight: 700; margin-right: 4px; }
+.saku-matrix__weekday { font-size: 10px; color: var(--text-muted); }
+.saku-sun .saku-matrix__weekday, .saku-sun .saku-matrix__daynum { color: var(--danger); }
+.saku-sat .saku-matrix__weekday, .saku-sat .saku-matrix__daynum { color: var(--primary-light); }
+.saku-today-badge {
+  background: var(--primary-light);
+  color: #fff;
+  font-size: 9px;
+  border-radius: 3px;
+  padding: 1px 4px;
+  margin-left: 4px;
+}
+.saku-row--today td, .saku-row--today th { background: #eef6ff !important; }
+.saku-row--highlight td, .saku-row--highlight th { background: #fdf6e3 !important; }
+.saku-row--today.saku-row--highlight td { background: #eef6ff !important; }
+
+.saku-cell { padding: 0; vertical-align: top; min-width: 108px; }
+.saku-cell--own { background: #fbf8ef; }
+.saku-cell__button {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: stretch;
+  background: transparent;
+  border: none;
+  width: 100%;
+  min-height: 34px;
+  padding: 4px;
+  text-align: left;
+}
+.saku-cell__none { color: var(--border-strong); text-align: center; font-size: 12px; }
+.saku-cell__none--confirmed { color: var(--text-muted); }
+
+.saku-tag {
+  display: block;
+  background: var(--surface-2);
+  border-left: 3px solid var(--primary-light);
+  border-radius: 3px;
+  padding: 2px 5px;
+  font-size: 10.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.saku-tag--anomaly { border-left-color: var(--warning); background: #fff3e0; }
+.saku-tag--missing { border-left-color: var(--warning); background: #fff8ec; color: #8a5a00; }
+.saku-tag--removed { border-left-color: var(--danger); background: #fbeeee; color: var(--text-muted); }
+.saku-warn { font-style: normal; margin-right: 2px; }
+.saku-badge {
+  font-style: normal;
+  font-size: 9px;
+  font-weight: 700;
+  border-radius: 3px;
+  padding: 0 3px;
+  margin-left: 3px;
+  vertical-align: middle;
+}
+.saku-badge--new { background: var(--danger); color: #fff; }
+.saku-badge--changed { background: var(--warning); color: #fff; }
+.saku-badge--removed { background: var(--text-muted); color: #fff; }
+.saku-badge--demo { background: var(--border-strong); color: #fff; }
+
+.saku-meta { font-size: 11px; color: var(--text-muted); }
+.saku-empty { color: var(--text-muted); padding: 24px; }
+
+/* セル詳細モーダル */
+.saku-cell-modal { width: 480px; }
+.saku-cell-modal__status { font-size: 12px; color: var(--text-muted); margin: 8px 0; }
+.saku-cell-modal__left-actions { display: flex; gap: 8px; }
+.saku-event-item { border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 8px; }
+.saku-event-item--removed { opacity: 0.75; }
+.saku-event-item__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 8px 10px;
+  font-size: 13px;
+  text-align: left;
+}
+.saku-event-item__cat {
+  background: var(--surface-2);
+  border-radius: 3px;
+  padding: 1px 6px;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+.saku-event-item__detail { padding: 0 10px 10px; }
+.saku-event-item__detail dl {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 4px 8px;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.saku-event-item__detail dt { color: var(--text-muted); }
+.saku-source { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
+.saku-source__seen { color: var(--text-muted); font-size: 11px; }
+.saku-source__open { padding: 3px 10px; font-size: 11px; }
+.saku-changes { margin-bottom: 8px; }
+.saku-changes h4 { font-size: 12px; margin-bottom: 4px; }
+.saku-changes ul { list-style: none; font-size: 11px; color: var(--text-muted); }
+
+.saku-anomaly {
+  background: #fff8ec;
+  border: 1px solid #f0d9a8;
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  margin: 6px 0;
+  font-size: 12px;
+}
+.saku-anomaly--new { background: #fff3e0; }
+.saku-anomaly__title { font-weight: 700; color: #8a5a00; }
+.saku-anomaly__evidence { margin-top: 4px; }
+.saku-anomaly__dates summary { cursor: pointer; color: var(--primary-light); font-size: 11px; margin-top: 4px; }
+.saku-anomaly__dates ul { list-style: none; font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+.saku-quick-add { display: flex; flex-direction: column; gap: 10px; border-top: 1px solid var(--border); padding-top: 10px; }
+.saku-quick-add label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--text-muted); flex: 1; }
+.saku-quick-add input, .saku-quick-add select, .saku-quick-add textarea {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 6px 8px;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+/* 店舗モーダル */
+.saku-store-modal { width: 520px; }
+.saku-store-modal__address { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+.saku-store-modal__links { display: flex; gap: 12px; font-size: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+.saku-store-modal h4 { font-size: 13px; margin: 12px 0 6px; }
+.saku-store-modal__empty { font-size: 12px; color: var(--text-muted); }
+.saku-pattern-list { list-style: none; display: flex; flex-direction: column; gap: 4px; font-size: 12px; }
+.saku-pattern-list__stat { color: var(--text-muted); margin-left: 8px; }
+.saku-history { width: 100%; border-collapse: collapse; font-size: 12px; }
+.saku-history td { padding: 4px 6px; border-bottom: 1px solid var(--border); }
+.saku-history--removed { color: var(--text-muted); }
+.saku-history__seen { color: var(--text-muted); font-size: 11px; white-space: nowrap; }
+
+@media (max-width: 720px) {
+  .app-header { height: auto; min-height: 56px; padding: 8px 12px; row-gap: 6px; }
+  .app-tabs { margin-left: 0; flex-wrap: wrap; }
+  .app-main { padding: 12px 10px 32px; }
+  .saku-toolbar__month h2 { font-size: 13px; min-width: 0; }
+  .saku-toolbar__jump { margin-left: 0; width: 100%; }
+  .saku-toolbar__jump button { flex: 1; }
+  .saku-filters__manual { margin-left: 0; }
+  .saku-matrix { max-height: 70vh; }
+  .saku-matrix thead th { min-width: 92px; }
+  .saku-cell { min-width: 92px; }
+  .saku-matrix thead th.saku-matrix__corner,
+  .saku-matrix tbody th.saku-matrix__date { min-width: 52px; width: 52px; }
+  .saku-event-item__detail dl { grid-template-columns: 68px 1fr; }
+}

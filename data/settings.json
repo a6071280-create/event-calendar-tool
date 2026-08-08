@@ -1,0 +1,11 @@
+{
+  "diff": {
+    "lookbackCount": 6,
+    "minSamples": 6,
+    "expectedMinRatio": 0.7,
+    "newPatternMaxRatio": 0.2,
+    "newBadgeDays": 3,
+    "removedBadgeDays": 7
+  },
+  "timezone": "Asia/Tokyo"
+}

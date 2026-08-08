@@ -8,6 +8,7 @@ import { ListView } from './components/ListView'
 import { OwnPromotionModal } from './components/OwnPromotionModal'
 import type { OwnPromotionInput } from './components/OwnPromotionModal'
 import { SummaryView } from './components/SummaryView'
+import { SakuView } from './saku/SakuView'
 import { NAGANO_PREFECTURE } from './constants'
 import { useEvents } from './hooks/useEvents'
 import { useOwnPromotions } from './hooks/useOwnPromotions'
@@ -25,6 +26,7 @@ interface PromotionModalState {
 }
 
 const TABS: { key: ViewTab; label: string }[] = [
+  { key: 'saku', label: '佐久市' },
   { key: 'calendar', label: 'カレンダー' },
   { key: 'list', label: 'リスト' },
   { key: 'summary', label: '集計' },
@@ -35,7 +37,7 @@ function App() {
   const { events, addEvent, updateEvent, deleteEvent, storeNameSuggestions } = useEvents()
   const { ownPromotions, addOwnPromotion, deleteOwnPromotion } = useOwnPromotions()
 
-  const [activeTab, setActiveTab] = useState<ViewTab>('calendar')
+  const [activeTab, setActiveTab] = useState<ViewTab>('saku')
   const [currentMonth, setCurrentMonth] = useState(new Date())
   const [areaFilterMode, setAreaFilterMode] = useState<AreaFilterMode>('all')
   const [eventModal, setEventModal] = useState<EventModalState | null>(null)
@@ -102,9 +104,10 @@ function App() {
         </button>
       </header>
 
-      <AreaFilterBar mode={areaFilterMode} onChange={setAreaFilterMode} />
+      {activeTab !== 'saku' && <AreaFilterBar mode={areaFilterMode} onChange={setAreaFilterMode} />}
 
       <main className="app-main">
+        {activeTab === 'saku' && <SakuView />}
         {activeTab === 'calendar' && (
           <CalendarView
             currentMonth={currentMonth}

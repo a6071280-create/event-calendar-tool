@@ -48,7 +48,7 @@ export interface OwnPromotionDay {
 
 export type AreaFilterMode = 'nagano' | 'all'
 
-export type ViewTab = 'calendar' | 'list' | 'summary' | 'forecast'
+export type ViewTab = 'saku' | 'calendar' | 'list' | 'summary' | 'forecast'
 
 /** 日別の実績（来店客数など任意の指標） */
 export interface ActualResult {
