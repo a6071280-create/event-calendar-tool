@@ -60,7 +60,7 @@ const extractRelatedLinks = (html: string, baseUrl: string, max = 15): string[] 
   while ((m = re.exec(html)) !== null && links.size < max * 3) {
     const href = m[1]
     const text = m[2].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 40)
-    if (!/(取材|来店|スケジュール|イベント|shuzai|schedule|event)/i.test(`${href} ${text}`)) continue
+    if (!/(取材|来店|スケジュール|イベント|shuzai|schedule|event|\/shop\/)/i.test(`${href} ${text}`)) continue
     try {
       const abs = new URL(href, baseUrl).toString()
       if (!links.has(abs)) links.set(abs, text)

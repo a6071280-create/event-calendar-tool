@@ -175,6 +175,15 @@
       "url": "https://777.slopachi-station.com/report_schedule/",
       "enabled": true,
       "notes": "メディア自身が公開する来店取材スケジュール総合ページ。robots.txt 許可を probe で確認済み"
+    },
+    {
+      "id": "1geki-shop-city-saku",
+      "mode": "media",
+      "sourceId": "other_site",
+      "sourceName": "一撃 店舗情報",
+      "url": "https://1geki.jp/shop/city/20217/",
+      "enabled": true,
+      "notes": "一撃の佐久市店舗一覧ページ。佐久市ホールの取材予定の入口。probe のリンク探索で個別店舗ページを特定する"
     }
   ]
 }
