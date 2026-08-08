@@ -1,0 +1,205 @@
+{
+  "generatedAt": "2026-08-08T23:45:55+09:00",
+  "regions": [
+    {
+      "id": "nagano-saku",
+      "prefecture": "長野県",
+      "city": "佐久市",
+      "enabled": true
+    },
+    {
+      "id": "nagano-ueda",
+      "prefecture": "長野県",
+      "city": "上田市",
+      "enabled": false
+    },
+    {
+      "id": "nagano-nagano",
+      "prefecture": "長野県",
+      "city": "長野市",
+      "enabled": false
+    }
+  ],
+  "stores": [
+    {
+      "id": "amuamu",
+      "name": "よろこびの街100万ドル アムアム店",
+      "shortName": "アムアム",
+      "regionId": "nagano-saku",
+      "prefecture": "長野県",
+      "city": "佐久市",
+      "address": "長野県佐久市大字長土呂新城125-1",
+      "isOwn": true,
+      "businessStatus": "open",
+      "displayOrder": 1,
+      "urls": {
+        "official": null,
+        "dmmPtown": "https://p-town.dmm.com/shops/nagano/5596",
+        "pworld": "https://www.p-world.co.jp/nagano/100man-amuamu.htm",
+        "sns": []
+      }
+    },
+    {
+      "id": "maruhan-saku",
+      "name": "マルハン佐久店",
+      "shortName": "マルハン佐久",
+      "regionId": "nagano-saku",
+      "prefecture": "長野県",
+      "city": "佐久市",
+      "address": "長野県佐久市岩村田4481",
+      "isOwn": false,
+      "businessStatus": "open",
+      "displayOrder": 2,
+      "urls": {
+        "official": "https://www.maruhan.co.jp/hall/0647/",
+        "dmmPtown": null,
+        "pworld": null,
+        "sns": []
+      }
+    },
+    {
+      "id": "super-arena-sakudaira",
+      "name": "スーパーアリーナ佐久平店",
+      "shortName": "スーパーアリーナ",
+      "regionId": "nagano-saku",
+      "prefecture": "長野県",
+      "city": "佐久市",
+      "address": "長野県佐久市塚原",
+      "isOwn": false,
+      "businessStatus": "open",
+      "displayOrder": 3,
+      "urls": {
+        "official": null,
+        "dmmPtown": "https://p-town.dmm.com/shops/nagano/5598",
+        "pworld": "https://www.p-world.co.jp/nagano/super-arena-saku.htm",
+        "sns": [
+          "https://x.com/superarena_saku"
+        ]
+      }
+    },
+    {
+      "id": "dynam-nagano-saku",
+      "name": "ダイナム長野佐久店",
+      "shortName": "ダイナム佐久",
+      "regionId": "nagano-saku",
+      "prefecture": "長野県",
+      "city": "佐久市",
+      "address": "長野県佐久市臼田字美里在家1535",
+      "isOwn": false,
+      "businessStatus": "open",
+      "displayOrder": 4,
+      "urls": {
+        "official": "https://www.dynam.jp/branch/40-286",
+        "dmmPtown": "https://p-town.dmm.com/shops/nagano/5605",
+        "pworld": null,
+        "sns": [
+          "https://x.com/dynam_00286"
+        ]
+      }
+    },
+    {
+      "id": "yahho-saku",
+      "name": "夢工房YAHHO佐久店",
+      "shortName": "YAHHO",
+      "regionId": "nagano-saku",
+      "prefecture": "長野県",
+      "city": "佐久市",
+      "address": "長野県佐久市岩村田北1-2-3",
+      "isOwn": false,
+      "businessStatus": "open",
+      "displayOrder": 5,
+      "urls": {
+        "official": null,
+        "dmmPtown": "https://p-town.dmm.com/shops/nagano/5594",
+        "pworld": "https://www.p-world.co.jp/nagano/yahho-saku-p.htm",
+        "sns": []
+      }
+    },
+    {
+      "id": "babide-saku",
+      "name": "パーラーバビデ佐久店",
+      "shortName": "バビデ",
+      "regionId": "nagano-saku",
+      "prefecture": "長野県",
+      "city": "佐久市",
+      "address": "長野県佐久市中込",
+      "isOwn": false,
+      "businessStatus": "open",
+      "displayOrder": 6,
+      "urls": {
+        "official": null,
+        "dmmPtown": "https://p-town.dmm.com/shops/nagano/5593",
+        "pworld": null,
+        "sns": []
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "ev_bc80k5_2026-07-24",
+      "storeId": "dynam-nagano-saku",
+      "date": "2026-07-24",
+      "name": "新台入替",
+      "category": "新台入替",
+      "detail": "★7/24新台入替★",
+      "status": "active",
+      "sources": [
+        {
+          "sourceId": "official_site",
+          "sourceName": "ダイナム公式サイト",
+          "url": "https://www.dynam.jp/branch/40-286",
+          "firstSeenAt": "2026-08-08T23:45:55+09:00",
+          "lastSeenAt": "2026-08-08T23:45:55+09:00"
+        }
+      ],
+      "firstSeenAt": "2026-08-08T23:45:55+09:00",
+      "lastSeenAt": "2026-08-08T23:45:55+09:00",
+      "createdAt": "2026-08-08T23:45:55+09:00",
+      "updatedAt": "2026-08-08T23:45:55+09:00",
+      "changes": [
+        {
+          "at": "2026-08-08T23:45:55+09:00",
+          "type": "added"
+        }
+      ]
+    },
+    {
+      "id": "ev_6cwakr_2026-08-05",
+      "storeId": "dynam-nagano-saku",
+      "date": "2026-08-05",
+      "name": "新台入替",
+      "category": "新台入替",
+      "detail": "★8/5新台入替★",
+      "status": "active",
+      "sources": [
+        {
+          "sourceId": "official_site",
+          "sourceName": "ダイナム公式サイト",
+          "url": "https://www.dynam.jp/branch/40-286",
+          "firstSeenAt": "2026-08-08T23:45:55+09:00",
+          "lastSeenAt": "2026-08-08T23:45:55+09:00"
+        }
+      ],
+      "firstSeenAt": "2026-08-08T23:45:55+09:00",
+      "lastSeenAt": "2026-08-08T23:45:55+09:00",
+      "createdAt": "2026-08-08T23:45:55+09:00",
+      "updatedAt": "2026-08-08T23:45:55+09:00",
+      "changes": [
+        {
+          "at": "2026-08-08T23:45:55+09:00",
+          "type": "added"
+        }
+      ]
+    }
+  ],
+  "dayStatuses": [],
+  "settings": {
+    "lookbackCount": 6,
+    "minSamples": 6,
+    "expectedMinRatio": 0.7,
+    "newPatternMaxRatio": 0.2,
+    "newBadgeDays": 3,
+    "removedBadgeDays": 7
+  },
+  "containsDemoData": false
+}
