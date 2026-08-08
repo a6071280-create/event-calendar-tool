@@ -15,6 +15,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import type { Store } from '../../src/saku/lib/types'
 import { extractFromPage, loadSiteConfigs } from './adapters/sites'
+import { htmlToTextBlocks } from './htmlText'
 import { nowJstIso, readJson } from './io'
 import { REPO_ROOT, STORES_FILE } from './paths'
 import { isPathAllowed, parseRobots } from './robots'
@@ -24,10 +25,18 @@ interface ProbeResult {
   id: string
   url: string
   enabled: boolean
+  /** 接続成功/失敗 */
+  connection: '成功' | '失敗'
   robots: string
   fetch: string
-  blocks: number
+  /** ページから取得したテキストブロック数（取得件数） */
+  blocksScanned: number
+  /** 抽出できたイベント件数 */
   extracted: number
+  /** イベントを抽出できた店舗数 */
+  storeCount: number
+  /** エラー内容（なければ空） */
+  error: string
   samples: string[]
   note?: string
 }
@@ -41,10 +50,13 @@ const probeSite = async (
     id: site.id,
     url: site.url,
     enabled: site.enabled,
+    connection: '失敗',
     robots: '未確認',
     fetch: '未実施',
-    blocks: 0,
+    blocksScanned: 0,
     extracted: 0,
+    storeCount: 0,
+    error: '',
     samples: [],
     note: site.notes,
   }
@@ -70,17 +82,27 @@ const probeSite = async (
     const res = await politeFetch(site.url)
     result.fetch = `HTTP ${res.status}`
     if (res.ok) {
+      result.connection = '成功'
       const html = await res.text()
       result.fetch += ` (${Math.round(html.length / 1024)}KB)`
+      result.blocksScanned = htmlToTextBlocks(html).length
       const observations = extractFromPage(html, site, stores, now)
-      result.blocks = observations.length > 0 ? observations.length : 0
       result.extracted = observations.length
+      result.storeCount = new Set(observations.map((o) => o.storeId)).size
       result.samples = observations
-        .slice(0, 5)
+        .slice(0, 10)
         .map((o) => `${o.date} ${stores.find((s) => s.id === o.storeId)?.shortName ?? o.storeId} ${o.name} (${o.category})`)
+    } else {
+      result.error = `HTTPステータス ${res.status}`
     }
   } catch (err) {
-    result.fetch = err instanceof PolitenessError ? 'robots.txt により拒否' : `エラー (${String(err).slice(0, 100)})`
+    if (err instanceof PolitenessError) {
+      result.fetch = 'robots.txt により拒否'
+      result.error = 'robots.txt が対象URLの取得を許可していない'
+    } else {
+      result.fetch = 'エラー'
+      result.error = String(err).slice(0, 160)
+    }
   }
 
   return result
@@ -104,10 +126,11 @@ const main = async () => {
     '',
     'DBには書き込まないドライラン。`npm run probe`（GitHub Actions の probe ワークフロー）で再生成される。',
     '',
-    '| サイト | 有効 | robots.txt | 取得 | 抽出件数 |',
-    '|---|---|---|---|---|',
+    '| サイト | 有効 | 接続 | robots.txt | 取得 | 取得ブロック数 | イベント件数 | 対象店舗数 | エラー内容 |',
+    '|---|---|---|---|---|---|---|---|---|',
     ...results.map(
-      (r) => `| ${r.id} | ${r.enabled ? '✅' : '－'} | ${r.robots} | ${r.fetch} | ${r.extracted} |`,
+      (r) =>
+        `| ${r.id} | ${r.enabled ? '✅' : '－'} | ${r.connection} | ${r.robots} | ${r.fetch} | ${r.blocksScanned} | ${r.extracted} | ${r.storeCount} | ${r.error || '－'} |`,
     ),
     '',
   ]
@@ -130,7 +153,9 @@ const main = async () => {
   fs.writeFileSync(outFile, lines.join('\n'), 'utf8')
   console.log(`[probe] ${outFile} を出力しました`)
   for (const r of results) {
-    console.log(`  - ${r.id}: robots=${r.robots} fetch=${r.fetch} extracted=${r.extracted}`)
+    console.log(
+      `  - ${r.id}: 接続=${r.connection} robots=${r.robots} 取得=${r.fetch} ブロック=${r.blocksScanned} イベント=${r.extracted} 店舗=${r.storeCount}${r.error ? ` エラー=${r.error}` : ''}`,
+    )
   }
 }
 
