@@ -22,6 +22,16 @@
       "notes": "ダイナム長野佐久店の公式店舗ページ（お知らせ・新台入替）。ご利用規定(dynam.jp/misc/provisions.html)に自動取得の禁止条項は確認されず。robots.txt はフェッチ時に自動確認"
     },
     {
+      "id": "maruhan-official-saku-news",
+      "mode": "store",
+      "storeId": "maruhan-saku",
+      "sourceId": "official_site",
+      "sourceName": "マルハン公式サイト",
+      "url": "https://www.maruhan.co.jp/hall/647/",
+      "enabled": true,
+      "notes": "マルハン佐久店の最新情報ページ（/hall/0647/ と構成が異なる場合の検証用）"
+    },
+    {
       "id": "1geki-shuzai-list",
       "mode": "media",
       "sourceId": "other_site",
@@ -39,6 +49,141 @@
       "url": "https://777.slopachi-station.com/shop_data/5751/",
       "enabled": false,
       "notes": "スーパーアリーナ佐久平店のホールサイト。利用規約の確認が済むまで無効"
+    },
+    {
+      "id": "1geki-shuzai-1",
+      "mode": "media",
+      "sourceId": "other_site",
+      "sourceName": "一撃 取材スケジュール",
+      "url": "https://shuzai.1geki.jp/shuzai/1/",
+      "enabled": true,
+      "notes": "一撃スロット調査隊のスケジュールページ。佐久市の登録店舗名にマッチした分だけ取り込む"
+    },
+    {
+      "id": "1geki-shuzai-5",
+      "mode": "media",
+      "sourceId": "other_site",
+      "sourceName": "一撃 取材スケジュール",
+      "url": "https://shuzai.1geki.jp/shuzai/5/",
+      "enabled": true,
+      "notes": "姫撃のスケジュールページ。佐久市の登録店舗名にマッチした分だけ取り込む"
+    },
+    {
+      "id": "1geki-shuzai-7",
+      "mode": "media",
+      "sourceId": "other_site",
+      "sourceName": "一撃 取材スケジュール",
+      "url": "https://shuzai.1geki.jp/shuzai/7/",
+      "enabled": true,
+      "notes": "Мトリックのスケジュールページ。佐久市の登録店舗名にマッチした分だけ取り込む"
+    },
+    {
+      "id": "1geki-shuzai-9",
+      "mode": "media",
+      "sourceId": "other_site",
+      "sourceName": "一撃 取材スケジュール",
+      "url": "https://shuzai.1geki.jp/shuzai/9/",
+      "enabled": true,
+      "notes": "一撃ランキングのスケジュールページ。佐久市の登録店舗名にマッチした分だけ取り込む"
+    },
+    {
+      "id": "1geki-shuzai-10",
+      "mode": "media",
+      "sourceId": "other_site",
+      "sourceName": "一撃 取材スケジュール",
+      "url": "https://shuzai.1geki.jp/shuzai/10/",
+      "enabled": true,
+      "notes": "ユメパチユメスロのスケジュールページ。佐久市の登録店舗名にマッチした分だけ取り込む"
+    },
+    {
+      "id": "1geki-shuzai-11",
+      "mode": "media",
+      "sourceId": "other_site",
+      "sourceName": "一撃 取材スケジュール",
+      "url": "https://shuzai.1geki.jp/shuzai/11/",
+      "enabled": true,
+      "notes": "四店傑集のスケジュールページ。佐久市の登録店舗名にマッチした分だけ取り込む"
+    },
+    {
+      "id": "1geki-shuzai-12",
+      "mode": "media",
+      "sourceId": "other_site",
+      "sourceName": "一撃 取材スケジュール",
+      "url": "https://shuzai.1geki.jp/shuzai/12/",
+      "enabled": true,
+      "notes": "ジャムの一撃のスケジュールページ。佐久市の登録店舗名にマッチした分だけ取り込む"
+    },
+    {
+      "id": "1geki-shuzai-15",
+      "mode": "media",
+      "sourceId": "other_site",
+      "sourceName": "一撃 取材スケジュール",
+      "url": "https://shuzai.1geki.jp/shuzai/15/",
+      "enabled": true,
+      "notes": "HYPER撃アッチ―のスケジュールページ。佐久市の登録店舗名にマッチした分だけ取り込む"
+    },
+    {
+      "id": "1geki-shuzai-18",
+      "mode": "media",
+      "sourceId": "other_site",
+      "sourceName": "一撃 取材スケジュール",
+      "url": "https://shuzai.1geki.jp/shuzai/18/",
+      "enabled": true,
+      "notes": "一喝のスケジュールページ。佐久市の登録店舗名にマッチした分だけ取り込む"
+    },
+    {
+      "id": "1geki-shuzai-19",
+      "mode": "media",
+      "sourceId": "other_site",
+      "sourceName": "一撃 取材スケジュール",
+      "url": "https://shuzai.1geki.jp/shuzai/19/",
+      "enabled": true,
+      "notes": "シノ来店実戦のスケジュールページ。佐久市の登録店舗名にマッチした分だけ取り込む"
+    },
+    {
+      "id": "1geki-shuzai-21",
+      "mode": "media",
+      "sourceId": "other_site",
+      "sourceName": "一撃 取材スケジュール",
+      "url": "https://shuzai.1geki.jp/shuzai/21/",
+      "enabled": true,
+      "notes": "MGekiのスケジュールページ。佐久市の登録店舗名にマッチした分だけ取り込む"
+    },
+    {
+      "id": "1geki-shuzai-mia",
+      "mode": "media",
+      "sourceId": "other_site",
+      "sourceName": "一撃 取材スケジュール",
+      "url": "https://shuzai.1geki.jp/shuzai/mia/",
+      "enabled": true,
+      "notes": "MiA来店のスケジュールページ。佐久市の登録店舗名にマッチした分だけ取り込む"
+    },
+    {
+      "id": "1geki-shuzai-shino",
+      "mode": "media",
+      "sourceId": "other_site",
+      "sourceName": "一撃 取材スケジュール",
+      "url": "https://shuzai.1geki.jp/shuzai/shino/",
+      "enabled": true,
+      "notes": "シノ来店Youtubeライブのスケジュールページ。佐久市の登録店舗名にマッチした分だけ取り込む"
+    },
+    {
+      "id": "slopachi-report-schedule",
+      "mode": "media",
+      "sourceId": "other_site",
+      "sourceName": "スロパチステーション 来店取材スケジュール",
+      "url": "https://777.slopachi-station.com/report_schedule/",
+      "enabled": true,
+      "notes": "メディア自身が公開する来店取材スケジュール総合ページ。robots.txt 許可を probe で確認済み"
+    },
+    {
+      "id": "1geki-shop-city-saku",
+      "mode": "media",
+      "sourceId": "other_site",
+      "sourceName": "一撃 店舗情報",
+      "url": "https://1geki.jp/shop/city/20217/",
+      "enabled": true,
+      "notes": "一撃の佐久市店舗一覧ページ。佐久市ホールの取材予定の入口。probe のリンク探索で個別店舗ページを特定する"
     }
   ]
 }

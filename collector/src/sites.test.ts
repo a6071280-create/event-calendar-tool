@@ -116,4 +116,28 @@ describe('extractFromPage', () => {
     const html = `<p>8/12 マルハン佐久店 通常営業</p>`
     expect(extractFromPage(html, storeSite, stores, NOW)).toHaveLength(0)
   })
+
+  it('見出しと日付が別ブロックでも隣接結合で抽出する（ダイナム型レイアウト）', () => {
+    const html = `<div><p>★新台入替★</p><p>8月14日(金) 10時開店</p></div>`
+    const obs = extractFromPage(html, storeSite, stores, NOW)
+    expect(obs).toHaveLength(1)
+    expect(obs[0]).toMatchObject({ date: '2026-08-14', category: '新台入替' })
+  })
+
+  it('日付→キーワードの順でも隣接結合で抽出する', () => {
+    const html = `<div><p>8月5日(水)</p><p>★新台入替★</p></div>`
+    const obs = extractFromPage(html, storeSite, stores, NOW)
+    expect(obs).toHaveLength(1)
+    expect(obs[0]).toMatchObject({ date: '2026-08-05', category: '新台入替' })
+  })
+
+  it('同一イベントが単独ブロックと結合ブロックの両方で見つかっても1件にする', () => {
+    const html = `<p>8/14 新台入替</p><p>ご案内</p>`
+    expect(extractFromPage(html, storeSite, stores, NOW)).toHaveLength(1)
+  })
+
+  it('「ご来店お待ちしております」は来店イベントとして誤検知しない', () => {
+    const html = `<p>8/14 ご来店お待ちしております</p>`
+    expect(extractFromPage(html, storeSite, stores, NOW)).toHaveLength(0)
+  })
 })

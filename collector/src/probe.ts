@@ -14,7 +14,8 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import type { Store } from '../../src/saku/lib/types'
-import { extractFromPage, loadSiteConfigs } from './adapters/sites'
+import { extractFromPage, loadSiteConfigs, matchStore } from './adapters/sites'
+import { CATEGORY_KEYWORDS, extractDates } from './extractCore'
 import { htmlToTextBlocks } from './htmlText'
 import { nowJstIso, readJson } from './io'
 import { REPO_ROOT, STORES_FILE } from './paths'
@@ -38,7 +39,36 @@ interface ProbeResult {
   /** エラー内容（なければ空） */
   error: string
   samples: string[]
+  /** 診断: 日付は含むがキーワードがないブロック数 */
+  dateOnlyBlocks: number
+  /** 診断: キーワードは含むが日付がないブロック数 */
+  keywordOnlyBlocks: number
+  /** 診断: mediaモードで登録店舗名に一致したブロック数 */
+  storeMatchedBlocks: number
+  /** 診断: 抽出に至らなかった惜しいブロックの例 */
+  nearMissSamples: string[]
+  /** 診断: 取材/来店/スケジュール関連の内部リンク（深いページの特定用） */
+  relatedLinks: string[]
   note?: string
+}
+
+/** ページ内の取材・来店・スケジュール関連リンクを列挙する（対象URL特定用の診断） */
+const extractRelatedLinks = (html: string, baseUrl: string, max = 15): string[] => {
+  const links = new Map<string, string>()
+  const re = /<a\b[^>]*href="([^"#]+)"[^>]*>([\s\S]*?)<\/a>/gi
+  let m: RegExpExecArray | null
+  while ((m = re.exec(html)) !== null && links.size < max * 3) {
+    const href = m[1]
+    const text = m[2].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 40)
+    if (!/(取材|来店|スケジュール|イベント|shuzai|schedule|event|\/shop\/)/i.test(`${href} ${text}`)) continue
+    try {
+      const abs = new URL(href, baseUrl).toString()
+      if (!links.has(abs)) links.set(abs, text)
+    } catch {
+      /* 不正URLは無視 */
+    }
+  }
+  return [...links.entries()].slice(0, max).map(([url, text]) => `${text || '(no text)'} → ${url}`)
 }
 
 const probeSite = async (
@@ -58,6 +88,11 @@ const probeSite = async (
     storeCount: 0,
     error: '',
     samples: [],
+    dateOnlyBlocks: 0,
+    keywordOnlyBlocks: 0,
+    storeMatchedBlocks: 0,
+    nearMissSamples: [],
+    relatedLinks: [],
     note: site.notes,
   }
 
@@ -85,7 +120,32 @@ const probeSite = async (
       result.connection = '成功'
       const html = await res.text()
       result.fetch += ` (${Math.round(html.length / 1024)}KB)`
-      result.blocksScanned = htmlToTextBlocks(html).length
+      const blocks = htmlToTextBlocks(html)
+      result.blocksScanned = blocks.length
+      // 診断: 抽出条件（日付+キーワード+店舗）にどこまで近づいているか
+      for (const block of blocks) {
+        const norm = block.normalize('NFKC')
+        const hasDate = extractDates(norm, now).length > 0
+        const hasKeyword = CATEGORY_KEYWORDS.some((k) => k.pattern.test(norm))
+        const matched = site.mode === 'media' ? matchStore(block, stores) : null
+        if (site.mode === 'media' && matched) result.storeMatchedBlocks++
+        if (hasDate && !hasKeyword) {
+          result.dateOnlyBlocks++
+          if (result.nearMissSamples.length < 5) {
+            result.nearMissSamples.push(`[キーワードなし] ${block.slice(0, 90)}`)
+          }
+        }
+        if (!hasDate && hasKeyword) {
+          result.keywordOnlyBlocks++
+          if (result.nearMissSamples.length < 5) {
+            result.nearMissSamples.push(`[日付なし] ${block.slice(0, 90)}`)
+          }
+        }
+        if (site.mode === 'media' && hasDate && hasKeyword && !matched && result.nearMissSamples.length < 5) {
+          result.nearMissSamples.push(`[店舗名不一致] ${block.slice(0, 90)}`)
+        }
+      }
+      result.relatedLinks = extractRelatedLinks(html, site.url)
       const observations = extractFromPage(html, site, stores, now)
       result.extracted = observations.length
       result.storeCount = new Set(observations.map((o) => o.storeId)).size
@@ -137,6 +197,24 @@ const main = async () => {
   for (const r of results) {
     if (r.samples.length > 0) {
       lines.push(`## ${r.id} の抽出サンプル`, '', ...r.samples.map((s) => `- ${s}`), '')
+    }
+    if (r.connection === '成功') {
+      lines.push(
+        `## ${r.id} の診断`,
+        '',
+        `- 日付のみ（キーワードなし）のブロック: ${r.dateOnlyBlocks}`,
+        `- キーワードのみ（日付なし）のブロック: ${r.keywordOnlyBlocks}`,
+        ...(r.storeMatchedBlocks > 0 || r.id.includes('1geki')
+          ? [`- 登録店舗名に一致したブロック: ${r.storeMatchedBlocks}`]
+          : []),
+        ...(r.nearMissSamples.length > 0
+          ? ['- 抽出に至らなかった例:', ...r.nearMissSamples.map((s) => `  - ${s}`)]
+          : []),
+        ...(r.relatedLinks.length > 0
+          ? ['- 取材/来店/スケジュール関連リンク:', ...r.relatedLinks.map((s) => `  - ${s}`)]
+          : []),
+        '',
+      )
     }
   }
   lines.push(
