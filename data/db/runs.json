@@ -15,6 +15,14 @@
       "updated": 0,
       "removed": 0,
       "errors": []
+    },
+    {
+      "at": "2026-08-08T23:30:48+09:00",
+      "batches": 2,
+      "added": 4,
+      "updated": 0,
+      "removed": 0,
+      "errors": []
     }
   ]
 }
