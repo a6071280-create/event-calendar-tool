@@ -18,8 +18,8 @@ import type {
 import { DEFAULT_DIFF_SETTINGS } from '../../src/saku/lib/types'
 import { mergeBatches } from '../../src/saku/lib/ingest'
 import { manualAdapter } from './adapters/manual'
-import { officialSiteAdapter } from './adapters/officialSite'
 import { officialXAdapter } from './adapters/officialX'
+import { sitesAdapter } from './adapters/sites'
 import type { Adapter, SourceConfig } from './adapters/types'
 import { nowJstIso, readJson, writeJson } from './io'
 import {
@@ -42,7 +42,7 @@ interface RunLogEntry {
   errors: string[]
 }
 
-const ADAPTERS: Adapter[] = [manualAdapter, officialSiteAdapter, officialXAdapter]
+const ADAPTERS: Adapter[] = [manualAdapter, sitesAdapter, officialXAdapter]
 
 const main = async (): Promise<void> => {
   const now = nowJstIso()

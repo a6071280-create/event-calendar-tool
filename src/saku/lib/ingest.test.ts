@@ -160,6 +160,33 @@ describe('mergeBatches', () => {
     expect(db.dayStatuses[0].status).toBe('confirmed_no_event')
   })
 
+  it('削除より古い観測を再取り込みしても復活しない（同一ファイル再処理の冪等性）', () => {
+    const removal = {
+      storeId: 'super-arena-sakudaira',
+      date: '2026-08-08',
+      name: 'ぞろぞろ取材',
+      source: { sourceId: 'manual', sourceName: '手動確認' },
+      observedAt: '2026-08-06T09:00:00+09:00',
+    }
+    const first = mergeBatches(
+      emptyDb,
+      [batch({ observations: [obs()], removals: [removal] })],
+      NOW,
+    )
+    expect(first.db.events[0].status).toBe('removed')
+    const changeCount = first.db.events[0].changes.length
+
+    // 同じバッチをもう一度取り込んでも状態・履歴は変わらない
+    const second = mergeBatches(
+      first.db,
+      [batch({ observations: [obs()], removals: [removal] })],
+      '2026-08-08T07:00:00+09:00',
+    )
+    expect(second.db.events[0].status).toBe('removed')
+    expect(second.db.events[0].changes).toHaveLength(changeCount)
+    expect(second.updated).toBe(0)
+  })
+
   it('削除後に再掲載されたら restored 履歴付きで active に戻す', () => {
     const first = mergeBatches(emptyDb, [batch({ observations: [obs()] })], NOW)
     const second = mergeBatches(

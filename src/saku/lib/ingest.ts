@@ -82,8 +82,18 @@ const applyEventObservation = (
 
   const changes: EventChange[] = []
   if (existing.status === 'removed') {
-    existing.status = 'active'
-    changes.push({ at: obs.observedAt, type: 'restored' })
+    // 削除時点より新しい観測のみ復活とみなす。古い観測の再取り込み
+    // （同じ手動ファイルを毎回読む等）で復活/削除を繰り返さないため。
+    const lastRemovedAt = [...existing.changes]
+      .reverse()
+      .find((c) => c.type === 'removed' || c.type === 'date_changed')?.at
+    if (!lastRemovedAt || Date.parse(obs.observedAt) > Date.parse(lastRemovedAt)) {
+      existing.status = 'active'
+      changes.push({ at: obs.observedAt, type: 'restored' })
+    } else {
+      mergeSourceRef(existing, obs)
+      return
+    }
   }
   if (existing.category !== obs.category) {
     changes.push({

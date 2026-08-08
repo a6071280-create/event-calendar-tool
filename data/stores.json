@@ -30,7 +30,7 @@
       "businessStatus": "open",
       "displayOrder": 2,
       "urls": {
-        "official": null,
+        "official": "https://www.maruhan.co.jp/hall/0647/",
         "dmmPtown": null,
         "pworld": null,
         "sns": []
@@ -49,9 +49,9 @@
       "displayOrder": 3,
       "urls": {
         "official": null,
-        "dmmPtown": null,
+        "dmmPtown": "https://p-town.dmm.com/shops/nagano/5598",
         "pworld": "https://www.p-world.co.jp/nagano/super-arena-saku.htm",
-        "sns": []
+        "sns": ["https://x.com/superarena_saku"]
       }
     },
     {

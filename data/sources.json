@@ -15,11 +15,25 @@
       "notes": "総合利用規約が許可のないデータ収集行為を明示的に禁止。手動確認のみ。"
     },
     {
+      "id": "sites",
+      "name": "公式サイト・イベント情報サイト（汎用ページ収集）",
+      "automation": "conditional",
+      "enabled": true,
+      "notes": "対象ページは data/site-sources.json で管理（サイトごとに enabled フラグあり）。robots.txt 遵守とアクセス間隔制御はフェッチ層が機械的に強制する。新しいサイトを追加する際は利用規約を確認すること。"
+    },
+    {
       "id": "official_site",
       "name": "店舗公式サイト",
       "automation": "conditional",
-      "enabled": false,
-      "notes": "店舗ごとに robots.txt と利用規約を確認してから collector/src/adapters/officialSite.ts に設定を追加し有効化する。robots.txt チェックは fetch 層で強制される。"
+      "enabled": true,
+      "notes": "sites アダプタ経由で収集（site-sources.json の mode:'store' 設定）。"
+    },
+    {
+      "id": "other_site",
+      "name": "その他イベント情報サイト（取材メディア等）",
+      "automation": "conditional",
+      "enabled": true,
+      "notes": "sites アダプタ経由で収集（site-sources.json の mode:'media' 設定）。メディアが自ら公開する取材スケジュールが対象。"
     },
     {
       "id": "official_sns",

@@ -1,0 +1,45 @@
+name: Probe event sources
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 週1回、月曜 JST 7:00 (UTC 日曜 22:00) に情報源の取得可否を検証
+    - cron: '0 22 * * 0'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: probe
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run probe
+        run: npm run probe
+
+      - name: Commit probe report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/probe-report.md
+          if git diff --cached --quiet; then
+            echo "No report changes."
+          else
+            git commit -m "chore: 情報源プローブレポート更新"
+            git push
+          fi
