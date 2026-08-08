@@ -21,18 +21,23 @@ export const CATEGORY_KEYWORDS: { pattern: RegExp; category: EventCategory; labe
 const pad2 = (n: number) => String(n).padStart(2, '0')
 
 /** テキストから開催日候補を抽出する（YYYY/M/D・M/D・M月D日・本日・明日） */
-export const extractDates = (normalizedText: string, referenceIso: string): { iso: string }[] => {
+export const extractDates = (
+  normalizedText: string,
+  referenceIso: string,
+): { iso: string; hasYear: boolean }[] => {
   const ref = new Date(referenceIso)
   const refY = ref.getFullYear()
   const refM = ref.getMonth() + 1
-  const results = new Map<string, { iso: string }>()
+  const results = new Map<string, { iso: string; hasYear: boolean }>()
 
-  const push = (year: number, month: number, day: number) => {
+  const push = (year: number, month: number, day: number, hasYear = false) => {
     const d = new Date(year, month - 1, day)
     if (d.getMonth() !== month - 1 || d.getDate() !== day) return
-    results.set(`${d.getFullYear()}-${pad2(month)}-${pad2(day)}`, {
-      iso: `${d.getFullYear()}-${pad2(month)}-${pad2(day)}`,
-    })
+    const iso = `${d.getFullYear()}-${pad2(month)}-${pad2(day)}`
+    const existing = results.get(iso)
+    // 同じ日付が年付き・年なしの両方で出た場合は年なし（イベント日らしい方）を優先
+    if (existing) existing.hasYear = existing.hasYear && hasYear
+    else results.set(iso, { iso, hasYear })
   }
 
   // YYYY/M/D または YYYY年M月D日（年付きはそのまま使う）
@@ -42,7 +47,7 @@ export const extractDates = (normalizedText: string, referenceIso: string): { is
   while ((m = reFull.exec(normalizedText)) !== null) {
     const month = Number(m[2])
     const day = Number(m[3])
-    if (month >= 1 && month <= 12 && day >= 1 && day <= 31) push(Number(m[1]), month, day)
+    if (month >= 1 && month <= 12 && day >= 1 && day <= 31) push(Number(m[1]), month, day, true)
     consumed.push([m.index, m.index + m[0].length])
   }
 
@@ -107,8 +112,14 @@ export const extractFromText = (
   const keyword = CATEGORY_KEYWORDS.find((k) => k.pattern.test(text))
   if (!keyword) return []
 
-  const dates = extractDates(text, referenceIso)
+  let dates = extractDates(text, referenceIso)
   if (dates.length === 0) return []
+
+  // 「2026/07/18 ★7/24新台入替★」のように年付き日付（掲載日）と年なし日付
+  // （イベント日）が混在する場合は、イベント日である年なし日付だけを使う。
+  if (dates.some((d) => d.hasYear) && dates.some((d) => !d.hasYear)) {
+    dates = dates.filter((d) => !d.hasYear)
+  }
 
   const refTime = Date.parse(referenceIso)
   const name = extractName(text, keyword)
