@@ -124,6 +124,13 @@ describe('extractFromPage', () => {
     expect(obs[0]).toMatchObject({ date: '2026-08-14', category: '新台入替' })
   })
 
+  it('日付→キーワードの順でも隣接結合で抽出する', () => {
+    const html = `<div><p>8月5日(水)</p><p>★新台入替★</p></div>`
+    const obs = extractFromPage(html, storeSite, stores, NOW)
+    expect(obs).toHaveLength(1)
+    expect(obs[0]).toMatchObject({ date: '2026-08-05', category: '新台入替' })
+  })
+
   it('同一イベントが単独ブロックと結合ブロックの両方で見つかっても1件にする', () => {
     const html = `<p>8/14 新台入替</p><p>ご案内</p>`
     expect(extractFromPage(html, storeSite, stores, NOW)).toHaveLength(1)

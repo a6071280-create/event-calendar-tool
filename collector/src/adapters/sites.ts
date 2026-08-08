@@ -62,10 +62,13 @@ export const extractFromPage = (
   if (site.mode === 'store') {
     for (let i = 0; i + 1 < blocks.length; i++) {
       const norm = blocks[i].normalize('NFKC')
+      const next = blocks[i + 1].normalize('NFKC')
       const hasKeyword = CATEGORY_KEYWORDS.some((k) => k.pattern.test(norm))
       const hasDate = extractDates(norm, nowIso).length > 0
-      const nextHasDate = extractDates(blocks[i + 1].normalize('NFKC'), nowIso).length > 0
-      if (hasKeyword && !hasDate && nextHasDate) {
+      const nextHasKeyword = CATEGORY_KEYWORDS.some((k) => k.pattern.test(next))
+      const nextHasDate = extractDates(next, nowIso).length > 0
+      // 「★新台入替★」→「8月5日(水)」／「8月5日(水)」→「★新台入替★」の両順に対応
+      if ((hasKeyword && !hasDate && nextHasDate) || (hasDate && !hasKeyword && nextHasKeyword)) {
         texts.push(`${blocks[i]} ${blocks[i + 1]}`)
       }
     }
