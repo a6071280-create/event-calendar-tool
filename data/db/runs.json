@@ -47,6 +47,14 @@
       "updated": 0,
       "removed": 0,
       "errors": []
+    },
+    {
+      "at": "2026-08-10T19:14:34+09:00",
+      "batches": 2,
+      "added": 0,
+      "updated": 0,
+      "removed": 0,
+      "errors": []
     }
   ]
 }
