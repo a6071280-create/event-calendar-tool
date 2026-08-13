@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-13T13:49:20+09:00",
+  "generatedAt": "2026-08-13T19:02:22+09:00",
   "regions": [
     {
       "id": "nagano-saku",
@@ -52,7 +52,7 @@
       "displayOrder": 2,
       "urls": {
         "official": "https://www.maruhan.co.jp/hall/0647/",
-        "dmmPtown": null,
+        "dmmPtown": "https://p-town.dmm.com/shops/nagano/5604",
         "pworld": null,
         "sns": []
       }
