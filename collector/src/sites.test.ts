@@ -140,4 +140,21 @@ describe('extractFromPage', () => {
     const html = `<p>8/14 ご来店お待ちしております</p>`
     expect(extractFromPage(html, storeSite, stores, NOW)).toHaveLength(0)
   })
+
+  it('storeExcerpt:false の情報源では本文抜粋を保存しない（著作権配慮）', () => {
+    const html = `<p>8/14 新台入替 話題の新機種を多数導入します</p>`
+    const noExcerpt: SiteConfig = { ...storeSite, storeExcerpt: false }
+    const [obs] = extractFromPage(html, noExcerpt, stores, NOW)
+    expect(obs).toMatchObject({ date: '2026-08-14', category: '新台入替' })
+    expect(obs.detail).toBeUndefined()
+    // 事実情報と出典は残る
+    expect(obs.name).toBe('新台入替')
+    expect(obs.source.url).toBe(storeSite.url)
+  })
+
+  it('既定（storeExcerpt 未指定）では従来どおり抜粋を保存する', () => {
+    const html = `<p>8/14 新台入替 話題の新機種を多数導入します</p>`
+    const [obs] = extractFromPage(html, storeSite, stores, NOW)
+    expect(obs.detail).toContain('新台入替')
+  })
 })

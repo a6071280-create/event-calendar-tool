@@ -3,9 +3,9 @@
     {
       "id": "dmm_ptown",
       "name": "DMMぱちタウン",
-      "automation": "prohibited",
-      "enabled": false,
-      "notes": "利用規約により無許可の自動取得は禁止。店長が目視確認し手動クイック登録で取り込む。データ利用許諾が得られた場合のみアダプタを実装・有効化する。"
+      "automation": "permitted",
+      "enabled": true,
+      "notes": "2026-08-11 にDMMより自動取得の利用許諾を取得（申請条件: 1日3回程度・佐久市内6店舗の店舗ページのみ・User-Agent明示・社内利用のみ・出典表記とリンク掲載）。収集は sites アダプタ経由（site-sources.json の dmm-ptown-*）。許諾条件が変更された場合は各サイトの enabled を false にすること。"
     },
     {
       "id": "pworld",
@@ -25,15 +25,15 @@
       "id": "official_site",
       "name": "店舗公式サイト",
       "automation": "conditional",
-      "enabled": true,
-      "notes": "sites アダプタ経由で収集（site-sources.json の mode:'store' 設定）。"
+      "enabled": false,
+      "notes": "2026-08-11: DMMぱちタウンで必要な情報が揃うため収集対象から除外。再開する場合は site-sources.json に対象ページを追加する（git 履歴に旧設定あり）。"
     },
     {
       "id": "other_site",
       "name": "その他イベント情報サイト（取材メディア等）",
       "automation": "conditional",
-      "enabled": true,
-      "notes": "sites アダプタ経由で収集（site-sources.json の mode:'media' 設定）。メディアが自ら公開する取材スケジュールが対象。"
+      "enabled": false,
+      "notes": "2026-08-11: DMMぱちタウンで必要な情報が揃うため収集対象から除外。再開する場合は site-sources.json に対象ページを追加する（git 履歴に旧設定あり）。"
     },
     {
       "id": "official_sns",

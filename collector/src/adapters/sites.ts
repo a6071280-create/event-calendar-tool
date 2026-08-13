@@ -24,6 +24,12 @@ export interface SiteConfig {
   sourceName: string
   url: string
   enabled: boolean
+  /**
+   * ページ本文の抜粋を detail として保存するか（既定 true）。
+   * 著作権に配慮して事実情報（店舗・日付・イベント名）だけを保存したい情報源では
+   * false にする。DMMぱちタウン（docs/dmm-permission.md）がこれに該当する。
+   */
+  storeExcerpt?: boolean
   notes?: string
 }
 
@@ -83,7 +89,8 @@ export const extractFromPage = (
       const key = `${obs.storeId}|${obs.date}|${normalize(obs.name)}|${obs.category}`
       if (seen.has(key)) continue
       seen.add(key)
-      observations.push(obs)
+      // storeExcerpt:false の情報源では本文抜粋を保存せず、事実情報のみ残す
+      observations.push(site.storeExcerpt === false ? { ...obs, detail: undefined } : obs)
     }
   }
   return observations.slice(0, MAX_OBSERVATIONS_PER_SITE)
