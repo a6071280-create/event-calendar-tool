@@ -8,9 +8,9 @@
       "sourceId": "dmm_ptown",
       "sourceName": "DMMぱちタウン",
       "url": "https://p-town.dmm.com/shops/nagano/5596",
-      "enabled": true,
+      "enabled": false,
       "storeExcerpt": false,
-      "notes": "アムアム店(自店)。2026-08-11 にDMMより利用許諾取得済み（1日3回・佐久市内店舗ページのみ・UA明示・社内利用・出典表記）"
+      "notes": "アムアム店(自店)。2026-08-13 の検証で HTTP 403（DMM側のボット対策による遮断）。許諾は得ているがサーバー側で自動アクセスが技術的に拒否されているため一時停止。DMMからUser-Agentまたはアクセス元の許可（技術的なホワイトリスト登録）を得られたら enabled:true に戻す。"
     },
     {
       "id": "dmm-ptown-maruhan-saku",
@@ -19,9 +19,9 @@
       "sourceId": "dmm_ptown",
       "sourceName": "DMMぱちタウン",
       "url": "https://p-town.dmm.com/shops/nagano/5604",
-      "enabled": true,
+      "enabled": false,
       "storeExcerpt": false,
-      "notes": "マルハン佐久店。2026-08-11 にDMMより利用許諾取得済み"
+      "notes": "マルハン佐久店。2026-08-13 の検証で HTTP 403（DMM側のボット対策による遮断）。許諾は得ているがサーバー側で自動アクセスが技術的に拒否されているため一時停止。DMMからUser-Agentまたはアクセス元の許可（技術的なホワイトリスト登録）を得られたら enabled:true に戻す。"
     },
     {
       "id": "dmm-ptown-super-arena-sakudaira",
@@ -30,9 +30,9 @@
       "sourceId": "dmm_ptown",
       "sourceName": "DMMぱちタウン",
       "url": "https://p-town.dmm.com/shops/nagano/5598",
-      "enabled": true,
+      "enabled": false,
       "storeExcerpt": false,
-      "notes": "スーパーアリーナ佐久平店。2026-08-11 にDMMより利用許諾取得済み"
+      "notes": "スーパーアリーナ佐久平店。2026-08-13 の検証で HTTP 403（DMM側のボット対策による遮断）。許諾は得ているがサーバー側で自動アクセスが技術的に拒否されているため一時停止。DMMからUser-Agentまたはアクセス元の許可（技術的なホワイトリスト登録）を得られたら enabled:true に戻す。"
     },
     {
       "id": "dmm-ptown-dynam-nagano-saku",
@@ -41,9 +41,9 @@
       "sourceId": "dmm_ptown",
       "sourceName": "DMMぱちタウン",
       "url": "https://p-town.dmm.com/shops/nagano/5605",
-      "enabled": true,
+      "enabled": false,
       "storeExcerpt": false,
-      "notes": "ダイナム長野佐久店。2026-08-11 にDMMより利用許諾取得済み"
+      "notes": "ダイナム長野佐久店。2026-08-13 の検証で HTTP 403（DMM側のボット対策による遮断）。許諾は得ているがサーバー側で自動アクセスが技術的に拒否されているため一時停止。DMMからUser-Agentまたはアクセス元の許可（技術的なホワイトリスト登録）を得られたら enabled:true に戻す。"
     },
     {
       "id": "dmm-ptown-yahho-saku",
@@ -52,9 +52,9 @@
       "sourceId": "dmm_ptown",
       "sourceName": "DMMぱちタウン",
       "url": "https://p-town.dmm.com/shops/nagano/5594",
-      "enabled": true,
+      "enabled": false,
       "storeExcerpt": false,
-      "notes": "夢工房YAHHO佐久店。2026-08-11 にDMMより利用許諾取得済み"
+      "notes": "夢工房YAHHO佐久店。2026-08-13 の検証で HTTP 403（DMM側のボット対策による遮断）。許諾は得ているがサーバー側で自動アクセスが技術的に拒否されているため一時停止。DMMからUser-Agentまたはアクセス元の許可（技術的なホワイトリスト登録）を得られたら enabled:true に戻す。"
     },
     {
       "id": "dmm-ptown-babide-saku",
@@ -63,9 +63,9 @@
       "sourceId": "dmm_ptown",
       "sourceName": "DMMぱちタウン",
       "url": "https://p-town.dmm.com/shops/nagano/5593",
-      "enabled": true,
+      "enabled": false,
       "storeExcerpt": false,
-      "notes": "パーラーバビデ佐久店。2026-08-11 にDMMより利用許諾取得済み"
+      "notes": "パーラーバビデ佐久店。2026-08-13 の検証で HTTP 403（DMM側のボット対策による遮断）。許諾は得ているがサーバー側で自動アクセスが技術的に拒否されているため一時停止。DMMからUser-Agentまたはアクセス元の許可（技術的なホワイトリスト登録）を得られたら enabled:true に戻す。"
     }
   ]
 }
