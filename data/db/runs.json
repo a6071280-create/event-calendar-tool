@@ -151,6 +151,14 @@
       "updated": 0,
       "removed": 0,
       "errors": []
+    },
+    {
+      "at": "2026-08-14T18:58:15+09:00",
+      "batches": 2,
+      "added": 0,
+      "updated": 0,
+      "removed": 0,
+      "errors": []
     }
   ]
 }
