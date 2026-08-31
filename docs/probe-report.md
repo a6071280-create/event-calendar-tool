@@ -1,6 +1,6 @@
 # 情報源プローブレポート
 
-実行日時: 2026-08-24T07:16:14+09:00 / UA: `saku-event-calendar-collector/1.0 (+https://github.com/a6071280-create/event-calendar-tool)`
+実行日時: 2026-08-31T09:09:25+09:00 / UA: `saku-event-calendar-collector/1.0 (+https://github.com/a6071280-create/event-calendar-tool)`
 
 DBには書き込まないドライラン。`npm run probe`（GitHub Actions の probe ワークフロー）で再生成される。
 
